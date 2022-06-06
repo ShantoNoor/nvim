@@ -5,9 +5,10 @@
 "colorscheme afterglow 
 " colorscheme orbital
 "colorscheme jellybeans
-"colorscheme spacecamp 
+colorscheme spacecamp 
 "colorscheme molokai 
-colorscheme nord
+" colorscheme nord
+" colorscheme ayu
 
 if g:os == 'Darwin' && exists("&termguicolors") && exists("&winblend")
   set termguicolors

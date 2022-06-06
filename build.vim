@@ -18,7 +18,12 @@ function! Build(file_base_name, file_type, input_output = " ") abort
   endif
 
   if ft == 'py'
-    let cmd .= ' && python3 ' . fn
+    if g:os == 'Windows'
+      let cmd .= ' && python ' . fn
+  	else
+      let cmd .= ' && python3 ' . fn
+  	endif
+
 
   elseif ft == 'cpp'
     let cmd .= ' && g++ -std=c++17 -DDEBUG ' . fn

@@ -58,10 +58,10 @@ set splitbelow
 set splitright
 nmap te :tabedit 
 nmap tt :tabn 
-nmap t1 :tabn 1<CR>
-nmap t2 :tabn 2<CR>
-nmap t3 :tabn 3<CR>
-nmap t4 :tabn 4<CR>
+nmap t4 :tabn 1<CR>
+nmap t5 :tabn 2<CR>
+nmap t6 :tabn 3<CR>
+nmap t7 :tabn 4<CR>
 nmap tq :q!<CR>
 nmap tw :wq<CR>
 nmap tqa :qa!<CR>
