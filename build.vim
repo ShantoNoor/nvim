@@ -26,7 +26,7 @@ function! Build(file_base_name, file_type, input_output = " ") abort
 
 
   elseif ft == 'cpp'
-    let cmd .= ' && g++ -std=c++17 -DDEBUG ' . fn
+    let cmd .= ' && g++ -std=c++17 -DDEBUG -O3 ' . fn
 
     if g:os == 'Windows'
       let cmd .= ' && a.exe'
