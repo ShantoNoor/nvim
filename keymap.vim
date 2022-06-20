@@ -64,6 +64,8 @@ nmap t6 :tabn 3<CR>
 nmap t7 :tabn 4<CR>
 nmap tq :q!<CR>
 nmap tw :wq<CR>
+nmap ts :w<CR>
+nmap tsa :wa<CR>
 nmap tqa :qa!<CR>
 nmap ti :split<CR>:e input.txt<CR>
 nmap to :split<CR>:e output.txt<CR>
