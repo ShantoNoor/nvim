@@ -2,9 +2,10 @@
 
 nnoremap <C-p> "0p
 " Delete without yank
-nnoremap <leader>d "_d
 nnoremap x "_x
-
+nnoremap d "_d
+nnoremap D "_D
+vnoremap d "_d
 " Increment/decrement
 nnoremap + <C-a>
 nnoremap - <C-x>
