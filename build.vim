@@ -31,7 +31,7 @@ function! Build(file_base_name, file_type, input_output = " ") abort
     if g:os == 'Windows'
       let cmd .= ' && a.exe'
   	else
-      let cmd .= ' && ./a.out'
+      let cmd .= ' && timeout 60s ./a.out'
   	endif
 
   elseif ft == 'c'

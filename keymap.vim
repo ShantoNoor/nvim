@@ -105,5 +105,5 @@ nmap <C-w><up> <C-w>+
 nmap <C-w><down> <C-w>-
 
 " cp template
-autocmd Filetype cpp nmap cpp :r code_library/template.cpp <CR>kdd55j
+autocmd Filetype cpp nmap cpp :r code_library/template.cpp <CR>kdd
 
