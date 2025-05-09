@@ -1,0 +1,85 @@
+local function CompileAndRun()
+  vim.cmd("wa") -- Save file
+  local filename = vim.fn.expand("%")
+  local filename_no_ext = vim.fn.expand("%:r")
+  local cmd = string.format(
+    'clang++ -std=c++20 -O3 -I"%s" -DDEBUG "%s" -o "%s" && ./"%s" <input.txt >output.txt && rm "%s"',
+    vim.fn.expand(".") .. "/", filename, filename_no_ext, filename_no_ext, filename_no_ext
+  )
+
+  local output = vim.fn.system(cmd)
+  local status = vim.v.shell_error
+
+  if status ~= 0 then
+    vim.api.nvim_echo({{"[ERROR]", "ErrorMsg"}, {output, "Normal"}}, true, {})
+  else
+    vim.api.nvim_echo({{"[Compiled and executed successfully]", "Question"}}, false, {})
+  end
+
+  ReloadOutputFile()
+end
+
+
+keymap.set("n", "<C-b>", CompileAndRun, opts)
+keymap.set("i", "<C-b>", function()
+  vim.cmd("stopinsert")
+  CompileAndRun()
+end, opts)
+
+local function OpenTerminal(height, on_exit)
+  vim.cmd("botright new")
+  vim.api.nvim_win_set_height(0, height or 10)
+
+  local shell = vim.o.shell
+  local term_win = vim.api.nvim_get_current_win()
+  local term_buf = vim.api.nvim_get_current_buf()
+
+  local job_id = vim.fn.termopen(shell, {
+    on_exit = function(_, _, _)
+      vim.schedule(function()
+        ReloadOutputFile()
+        if vim.api.nvim_win_is_valid(term_win) then
+          vim.api.nvim_win_close(term_win, true)
+        end
+        if vim.api.nvim_buf_is_valid(term_buf) then
+          vim.api.nvim_buf_delete(term_buf, { force = true })
+        end
+      end)
+    end,
+  })
+
+  return job_id
+end
+
+local function CompileAndRun1()
+  vim.cmd("wa") -- Save all files
+
+  local filename = vim.fn.expand("%")
+  local filename_no_ext = vim.fn.expand("%:r")
+  local current_dir = vim.fn.expand(".")
+
+  local cmd = string.format(
+    'clang++ -std=c++20 -O3 -I"%s" -DDEBUG "%s" -o "%s" && ./"%s" <input.txt >output.txt && rm "%s"',
+    current_dir, filename, filename_no_ext, filename_no_ext, filename_no_ext
+  )
+
+  local job_id = OpenTerminal(10)
+
+  -- Send the command + newline to execute
+  vim.fn.chansend(job_id, cmd .. "\n")
+end
+
+
+-- keymap.set("n", "<C-j>", OpenTerminal, opts)
+keymap.set("n", "<leader>b", CompileAndRun1, opts)
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({
+  cmd = 'clang++ -std=c++20 -O3 -I"./" -DDEBUG "a.cpp" -o "a" && ./"a" <input.txt >output.txt && rm "a"',
+  hidden = true,
+})
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
