@@ -52,13 +52,13 @@ return {
   --   "loctvl842/monokai-pro.nvim",
   --   config = function()
   --     require("monokai-pro").setup({
-  --       filter = "classic",
-  --       -- transparent_background = true,
+  --       filter = "spectrum",
+  --       transparent_background = false,
   --       terminal_colors = true,
-  --       -- devicons = true,
+  --       devicons = true,
   --       background_clear = {
   --         -- "float_win",
-  --         -- "toggleterm",
+  --         "toggleterm",
   --         "telescope",
   --         -- "which-key",
   --         -- "renamer",
@@ -68,17 +68,30 @@ return {
   --         -- "bufferline", -- better used if background of `neo-tree` or `nvim-tree` is cleared
   --       },
   --     })
-  --     vim.cmd.colorscheme("monokai-pro-classic")
+  --     vim.cmd.colorscheme("monokai-pro-spectrum")
   --   end
   -- },
-  {
-    "sainnhe/sonokai",
-    priority = 1000,
+  -- {
+  --   "sainnhe/sonokai",
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme("sonokai")
+  --   end,
+  -- },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   opts = {
+  --   },
+  --   config = function()
+  --     vim.cmd.colorscheme("tokyonight-night")
+  --   end,
+  -- },
+  { 
+    "EdenEast/nightfox.nvim", 
     config = function()
-      vim.g.sonokai_transparent_background = "1"
-      vim.g.sonokai_enable_italic = "1"
-      vim.g.sonokai_style = "andromeda"
-      vim.cmd.colorscheme("sonokai")
-    end,
-  },
+      vim.cmd("colorscheme carbonfox")
+    end
+  }
 }

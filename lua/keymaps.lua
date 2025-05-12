@@ -11,7 +11,11 @@ keymap.set("n", "<leader>ff", ":Telescope find_files<cr>")
 keymap.set('n', '<leader>e', ':Neotree filesystem reveal left<CR>', {})
 
 -- commentry
+keymap.set({"n", "v"}, "<C-t>", ":CommentToggle<cr>")
 keymap.set({"n", "v"}, "<C-/>", ":CommentToggle<cr>")
+
+-- toggleterm
+vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
 
 -- Increment/decrement
 keymap.set("n", "+", "<C-a>")
